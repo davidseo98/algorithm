@@ -44,10 +44,23 @@ class Solution(object):
         :rtype: int
         """
         
-        s, e = 0, len(height) - 1
+        s, e = 0, 1
 
-        cur = min(height[e], height[s]) * (e - s)
-        while s < e:
+        max_area = min(height[0], height[1])
 
-            temp_s = s
+        results = []
 
+        while e < len(height)-1:
+
+            start_move_area = None if e-s==1 else (e-s-1) * min(height[s+1], height[e])
+            end_move_area = (e+1-s) * min(height[s], height[e+1])
+
+            if start_move_area == None or start_move_area < end_move_area:
+                e += 1
+                max_area = max(max_area, end_move_area)
+
+            else:
+                s += 1
+                max_area = max(max_area, start_move_area)
+
+        return max_area
