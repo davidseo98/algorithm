@@ -48,8 +48,6 @@ class Solution(object):
 
         max_area = min(height[0], height[1])
 
-        results = []
-
         while e < len(height)-1:
 
             start_move_area = None if e-s==1 else (e-s-1) * min(height[s+1], height[e])
@@ -64,3 +62,27 @@ class Solution(object):
                 max_area = max(max_area, start_move_area)
 
         return max_area
+    
+    # 32/63 case passed
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        
+        s, e = 0, len(height)-1
+        left_idx, right_idx = s, e
+        
+        while s < e:
+            
+            if s+1 < e and s+1 - left_idx < height[s+1] - height[left_idx]:
+                s += 1
+            
+            elif e-1 > s and right_idx - e-1 < height[e-1] - height[right_idx]:
+                e -= 1
+
+            else:
+                s -= 1
+                e -= 1
+
+        return (right_idx-left_idx) * min(height[right_idx], height[left_idx])
