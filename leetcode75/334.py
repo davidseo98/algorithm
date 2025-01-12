@@ -66,3 +66,17 @@ class Solution(object):
 
         if max_len >= 3: return True
         return False 
+    
+    def increasingTriplet(self, nums):
+
+        first, second = float("inf")
+
+        for num in nums:
+
+            if num >= first:
+                first = num
+            elif num >= second:
+                second = num
+            else: return True
+
+        return False
