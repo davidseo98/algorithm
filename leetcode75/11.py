@@ -86,3 +86,28 @@ class Solution(object):
                 e -= 1
 
         return (right_idx-left_idx) * min(height[right_idx], height[left_idx])
+    
+    # Beats 55.61% (runtime)
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        
+        s, e = 0, len(height)-1
+        s_h, e_h = height[s], height[e]
+        max_area = (e - s) * min(s_h, e_h)
+
+        while s < e:
+            
+            if s_h <= e_h:
+                s += 1
+                s_h = height[s]
+
+            else:
+                e -= 1
+                e_h = height[e]
+
+            max_area = max(max_area, (e-s)*min(s_h, e_h))
+
+        return max_area
