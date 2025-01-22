@@ -15,7 +15,7 @@ class Solution(object):
 
         for x in range(row_cnt):
             for y in range(col_cnt):
-                if x != y and isConnected[x][y]:
+                if isConnected[x][y]:
                     graph[x].append(y)
                     graph[y].append(x)
 
